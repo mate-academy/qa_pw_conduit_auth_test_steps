@@ -10,13 +10,14 @@ test.describe('Sign up negative tests', () => {
   });
 
   test('Sign up with empty username', async () => {
+    const errorMessage = `username:Username must start with a letter,\
+       have no spaces, and be 2 - 40 characters.`;
+
     await signUpPage.fillEmailField('test@gmail.com');
     await signUpPage.fillPasswordField('newpass123!');
     await signUpPage.clickSignUpButton();
 
-    await signUpPage.assertErrorMessageContainsText(
-      `username:Username must start with a letter, have no spaces, and be 2 - 40 characters.`,
-    );
+    await signUpPage.assertErrorMessageContainsText(errorMessage);
   });
 
   test('Sign up with empty email', async () => {
