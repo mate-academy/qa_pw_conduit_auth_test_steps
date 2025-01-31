@@ -9,7 +9,7 @@ test.describe('Sign up negative tests', () => {
     await signUpPage.open();
   });
 
-  test('Assert error message for empty username in Sign up form', async () => {
+  test('Sign up with empty username', async () => {
     await signUpPage.fillEmailField('test@gmail.com');
     await signUpPage.fillPasswordField('newpass123!');
     await signUpPage.clickSignUpButton();
@@ -19,7 +19,7 @@ test.describe('Sign up negative tests', () => {
     );
   });
 
-  test('Assert error message for empty email in Sign up form', async () => {
+  test('Sign up with empty email', async () => {
     await signUpPage.fillUsernameField('newuser');
     await signUpPage.fillPasswordField('newpass123!');
     await signUpPage.clickSignUpButton();
@@ -29,7 +29,7 @@ test.describe('Sign up negative tests', () => {
     );
   });
 
-  test('Assert error message for empty password in Sign up form', async () => {
+  test('Sign up with empty password', async () => {
     await signUpPage.fillUsernameField('newuser');
     await signUpPage.fillEmailField('test@gmail.com');
     await signUpPage.clickSignUpButton();

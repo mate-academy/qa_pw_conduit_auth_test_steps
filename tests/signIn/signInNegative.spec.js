@@ -9,19 +9,19 @@ test.describe('Sign in negative tests', () => {
     await signInPage.open();
   });
 
-  test('Assert error message for empty password', async () => {
+  test('Sign in with empty password', async () => {
     await signInPage.fillEmailField('test@gmail.com');
     await signInPage.clickSignInButton();
     await signInPage.assertErrorMessageContainsText(`password:can't be blank`);
   });
 
-  test('Assert error message for empty email', async () => {
+  test('Sign in with empty email', async () => {
     await signInPage.fillPasswordField('newpass123!');
     await signInPage.clickSignInButton();
     await signInPage.assertErrorMessageContainsText(`email:can't be blank`);
   });
 
-  test('Assert error message for wrong password', async () => {
+  test('Sign in with wrong password', async () => {
     await signInPage.fillEmailField('test@gmail.com');
     await signInPage.fillPasswordField('1');
     await signInPage.clickSignInButton();

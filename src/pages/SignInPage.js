@@ -1,4 +1,4 @@
-import { expect } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 
 export class SignInPage {
   constructor(page) {
@@ -10,22 +10,32 @@ export class SignInPage {
   }
 
   async open() {
-    await this.page.goto('/user/login');
+    await test.step(`Open 'Sign In' page`, async () => {
+      await this.page.goto('/user/login');
+    });
   }
 
   async fillEmailField(email) {
-    await this.emailField.fill(email);
+    await test.step(`Fill the 'Email' field`, async () => {
+      await this.emailField.fill(email);
+    });
   }
 
   async fillPasswordField(password) {
-    await this.passwordField.fill(password);
+    await test.step(`Fill the 'Password' field`, async () => {
+      await this.passwordField.fill(password);
+    });
   }
 
   async clickSignInButton() {
-    await this.signInButton.click();
+    await test.step(`Click the 'Sign in' button`, async () => {
+      await this.signInButton.click();
+    });
   }
 
   async assertErrorMessageContainsText(messageText) {
-    await expect(this.errorMessage).toContainText(messageText);
+    await test.step(`Assert the '${messageText}' error is shown`, async () => {
+      await expect(this.errorMessage).toContainText(messageText);
+    });
   }
 }
