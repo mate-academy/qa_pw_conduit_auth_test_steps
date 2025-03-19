@@ -3,7 +3,7 @@
 ## Preparation
 
 1. Open the forked repo in VSCode.
-2. Create a new branch by running git checkout -b task_solution.
+2. Create a new branch by running `git checkout -b task_solution`.
 3. Run the installation commands:
 
     - `npm ci`
