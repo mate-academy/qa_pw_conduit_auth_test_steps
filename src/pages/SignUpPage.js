@@ -1,4 +1,4 @@
-import { expect } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 
 export class SignUpPage {
   constructor(page) {
@@ -11,26 +11,40 @@ export class SignUpPage {
   }
 
   async open() {
-    await this.page.goto('/user/register');
+    await test.step('Open the sign up page', async () => {
+      await this.page.goto('/user/register');
+    });
   }
 
   async fillUsernameField(username) {
-    await this.usernameField.fill(username);
+    await test.step(`Fill the username field with ${username}`, async () => {
+      await this.usernameField.fill(username);
+    });
   }
 
   async fillEmailField(email) {
-    await this.emailField.fill(email);
+    await test.step(`Fill the email field with ${email}`, async () => {
+      await this.emailField.fill(email);
+    });
   }
 
   async fillPasswordField(password) {
-    await this.passwordField.fill(password);
+    await test.step(`Fill the password field with ${password}`, async () => {
+      await this.passwordField.fill(password);
+    });
   }
 
   async clickSignUpButton() {
-    await this.signUpButton.click();
+    await test.step('Click the sign up button', async () => {
+      await this.signUpButton.click();
+    });
   }
 
   async assertErrorMessageContainsText(messageText) {
-    await expect(this.errorMessage).toContainText(messageText);
+    await test.step(`
+      Assert the error message "${messageText}" is shown
+    `, async () => {
+      await expect(this.errorMessage).toContainText(messageText);
+    });
   }
 }
