@@ -3,8 +3,4 @@ export class HomePage {
     this.page = page;
     this.yourFeedTab = page.getByText('Your Feed');
   }
-
-  async assertYourFeedTabIsVisible() {
-    return await this.yourFeedTab.isVisible();
-  }
 }

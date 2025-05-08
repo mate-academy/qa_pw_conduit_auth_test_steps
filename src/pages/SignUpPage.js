@@ -29,6 +29,7 @@ export class SignUpPage {
   }
 
   async getErrorMessageText() {
+    await this.errorMessage.waitFor({ state: 'visible' });
     return await this.errorMessage.textContent();
   }
 }
