@@ -1,4 +1,4 @@
-import { test } from '@playwright/test';
+import { test, expect } from '@playwright/test';
 import { SignUpPage } from '../../src/pages/SignUpPage';
 
 test.describe('Sign up negative tests', () => {
@@ -10,14 +10,17 @@ test.describe('Sign up negative tests', () => {
   });
 
   test('Sign up with empty username', async () => {
-    const errorMessage = `username:Username must start with a letter,\
+    const expectedMessage = `username:Username must start with a letter,\
        have no spaces, and be 2 - 40 characters.`;
 
     await signUpPage.fillEmailField('test@gmail.com');
     await signUpPage.fillPasswordField('newpass123!');
     await signUpPage.clickSignUpButton();
 
-    await signUpPage.assertErrorMessageContainsText(errorMessage);
+    const actualMessage = await signUpPage.getErrorMessageText();
+    expect(actualMessage.replace(/\s+/g, ' ').trim()).toContain(
+      expectedMessage.replace(/\s+/g, ' ').trim(),
+    );
   });
 
   test('Sign up with empty email', async () => {
@@ -25,9 +28,8 @@ test.describe('Sign up negative tests', () => {
     await signUpPage.fillPasswordField('newpass123!');
     await signUpPage.clickSignUpButton();
 
-    await signUpPage.assertErrorMessageContainsText(
-      `email:This email does not seem valid.`,
-    );
+    const actualMessage = await signUpPage.getErrorMessageText();
+    expect(actualMessage).toContain('email:This email does not seem valid.');
   });
 
   test('Sign up with empty password', async () => {
@@ -35,6 +37,7 @@ test.describe('Sign up negative tests', () => {
     await signUpPage.fillEmailField('test@gmail.com');
     await signUpPage.clickSignUpButton();
 
-    await signUpPage.assertErrorMessageContainsText(`password:can't be blank`);
+    const actualMessage = await signUpPage.getErrorMessageText();
+    expect(actualMessage).toContain(`password:can't be blank`);
   });
 });

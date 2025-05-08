@@ -1,5 +1,3 @@
-import { expect } from '@playwright/test';
-
 export class SignUpPage {
   constructor(page) {
     this.page = page;
@@ -30,7 +28,8 @@ export class SignUpPage {
     await this.signUpButton.click();
   }
 
-  async assertErrorMessageContainsText(messageText) {
-    await expect(this.errorMessage).toContainText(messageText);
+  async getErrorMessageText() {
+    await this.errorMessage.waitFor({ state: 'visible' });
+    return await this.errorMessage.textContent();
   }
 }
