@@ -17,7 +17,7 @@ test.describe('Sign up negative tests', () => {
     await signUpPage.fillPasswordField('newpass123!');
     await signUpPage.clickSignUpButton();
 
-    await signUpPage.assertErrorMessageContainsText(errorMessage);
+    await signUpPage.getErrorMessageText(errorMessage);
   });
 
   test('Sign up with empty email', async () => {
@@ -25,7 +25,7 @@ test.describe('Sign up negative tests', () => {
     await signUpPage.fillPasswordField('newpass123!');
     await signUpPage.clickSignUpButton();
 
-    await signUpPage.assertErrorMessageContainsText(
+    await signUpPage.getErrorMessageText(
       `email:This email does not seem valid.`,
     );
   });
@@ -35,6 +35,6 @@ test.describe('Sign up negative tests', () => {
     await signUpPage.fillEmailField('test@gmail.com');
     await signUpPage.clickSignUpButton();
 
-    await signUpPage.assertErrorMessageContainsText(`password:can't be blank`);
+    await signUpPage.getErrorMessageText(`password:can't be blank`);
   });
 });
