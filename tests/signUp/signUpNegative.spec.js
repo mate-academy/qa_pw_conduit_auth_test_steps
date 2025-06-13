@@ -13,28 +13,52 @@ test.describe('Sign up negative tests', () => {
     const errorMessage = `username:Username must start with a letter,\
        have no spaces, and be 2 - 40 characters.`;
 
-    await signUpPage.fillEmailField('test@gmail.com');
-    await signUpPage.fillPasswordField('newpass123!');
-    await signUpPage.clickSignUpButton();
+    await test.step('Fill only email and password', async () => {
+      await signUpPage.fillEmailField('test@gmail.com');
+      await signUpPage.fillPasswordField('newpass123!');
+    });
 
-    await signUpPage.assertErrorMessageContainsText(errorMessage);
+    await test.step('Click Sign Up button', async () => {
+      await signUpPage.clickSignUpButton();
+    });
+
+    await test.step('Assert error message is shown', async () => {
+      await signUpPage.assertErrorMessageContainsText(errorMessage);
+    });
   });
 
   test('Sign up with empty email', async () => {
-    await signUpPage.fillUsernameField('newuser');
-    await signUpPage.fillPasswordField('newpass123!');
-    await signUpPage.clickSignUpButton();
+    await test.step('Fill only username and password', async () => {
+      await signUpPage.fillUsernameField('newuser');
+      await signUpPage.fillPasswordField('newpass123!');
+    });
 
-    await signUpPage.assertErrorMessageContainsText(
-      `email:This email does not seem valid.`,
-    );
+    await test.step('Click Sign Up button', async () => {
+      await signUpPage.clickSignUpButton();
+    });
+
+    await test.step('Assert error message is shown', async () => {
+      await signUpPage.assertErrorMessageContainsText(
+        `email:This email does not seem valid.`,
+      );
+    });
   });
 
   test('Sign up with empty password', async () => {
-    await signUpPage.fillUsernameField('newuser');
-    await signUpPage.fillEmailField('test@gmail.com');
-    await signUpPage.clickSignUpButton();
+    await test.step('Fill only username and email', async () => {
+      await signUpPage.fillUsernameField('newuser');
+      await signUpPage.fillEmailField('test@gmail.com');
+    });
 
-    await signUpPage.assertErrorMessageContainsText(`password:can't be blank`);
+    await test.step('Click Sign Up button', async () => {
+      await signUpPage.clickSignUpButton();
+    });
+
+    await test.step('Assert error message is shown', async () => {
+       
+      await signUpPage.assertErrorMessageContainsText(
+        `password:can't be blank`,
+      );
+    });
   });
 });
