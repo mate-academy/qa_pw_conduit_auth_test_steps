@@ -10,19 +10,19 @@ export class SignInPage {
   }
 
   async open() {
-    await test.step(`Open 'Sign In' page`, async () => {
+    await test.step(`Open Sign In page`, async () => {
       await this.page.goto('/user/login');
     });
   }
 
   async fillEmailField(email) {
-    await test.step(`Fill the 'Email' field`, async () => {
+    await test.step(`Fill the Email field`, async () => {
       await this.emailField.fill(email);
     });
   }
 
   async fillPasswordField(password) {
-    await test.step(`Fill the 'Password' field`, async () => {
+    await test.step(`Fill the Password field`, async () => {
       await this.passwordField.fill(password);
     });
   }
