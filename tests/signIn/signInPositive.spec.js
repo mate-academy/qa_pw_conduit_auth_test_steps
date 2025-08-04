@@ -22,5 +22,7 @@ test('Successful `Sign in` flow test', async () => {
   await signInPage.fillPasswordField(user.password);
   await signInPage.clickSignInButton();
 
-  await homePage.assertYourFeedTabIsVisible();
+  await test.step(`Assert the 'Your Feed' tab is visible`, async () => {
+    await homePage.assertYourFeedTabIsVisible();
+  });
 });

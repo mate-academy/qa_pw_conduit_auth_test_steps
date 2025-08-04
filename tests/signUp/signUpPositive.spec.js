@@ -19,11 +19,27 @@ test.beforeEach(async ({ page }) => {
 });
 
 test('Successful `Sign up` flow test', async () => {
-  await signUpPage.open();
-  await signUpPage.fillUsernameField(user.username);
-  await signUpPage.fillEmailField(user.email);
-  await signUpPage.fillPasswordField(user.password);
-  await signUpPage.clickSignUpButton();
+  await test.step(`Open 'Sign Up' page`, async () => {
+    await signUpPage.open();
+  });
 
-  await homePage.assertYourFeedTabIsVisible();
+  await test.step(`Fill the 'Username' field`, async () => {
+    await signUpPage.fillUsernameField(user.username);
+  });
+
+  await test.step(`Fill the 'Email' field`, async () => {
+    await signUpPage.fillEmailField(user.email);
+  });
+
+  await test.step(`Fill the 'Password' field`, async () => {
+    await signUpPage.fillPasswordField(user.password);
+  });
+
+  await test.step(`Click the 'Sign up' button`, async () => {
+    await signUpPage.clickSignUpButton();
+  });
+
+  await test.step(`Assert the 'Your Feed' tab is visible`, async () => {
+    await homePage.assertYourFeedTabIsVisible();
+  });
 });
