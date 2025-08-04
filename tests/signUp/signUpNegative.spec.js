@@ -6,6 +6,7 @@ test.describe('Sign up negative tests', () => {
 
   test.beforeEach(async ({ page }) => {
     signUpPage = new SignUpPage(page);
+
     await test.step(`Open 'Sign Up' page`, async () => {
       await signUpPage.open();
     });

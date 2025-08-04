@@ -17,10 +17,21 @@ test.beforeEach(async ({ page }) => {
 });
 
 test('Successful `Sign in` flow test', async () => {
-  await signInPage.open();
-  await signInPage.fillEmailField(user.email);
-  await signInPage.fillPasswordField(user.password);
-  await signInPage.clickSignInButton();
+  await test.step(`Open 'Sign In' page`, async () => {
+    await signInPage.open();
+  });
+
+  await test.step(`Fill the 'Email' field`, async () => {
+    await signInPage.fillEmailField(user.email);
+  });
+
+  await test.step(`Fill the 'Password' field`, async () => {
+    await signInPage.fillPasswordField(user.password);
+  });
+
+  await test.step(`Click the 'Sign in' button`, async () => {
+    await signInPage.clickSignInButton();
+  });
 
   await test.step(`Assert the 'Your Feed' tab is visible`, async () => {
     await homePage.assertYourFeedTabIsVisible();
