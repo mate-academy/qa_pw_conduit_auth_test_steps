@@ -1,4 +1,4 @@
-import { expect } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 
 export class HomePage {
   constructor(page) {
@@ -7,6 +7,8 @@ export class HomePage {
   }
 
   async assertYourFeedTabIsVisible() {
-    await expect(this.yourFeedTab).toBeVisible();
+    await test.step(`Assert the 'Feed' tab is visible`, async () => {
+      await expect(this.yourFeedTab).toBeVisible();
+    });
   }
 }
