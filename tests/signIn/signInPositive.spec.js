@@ -1,4 +1,4 @@
-import { test } from '@playwright/test';
+import { test, expect } from '@playwright/test';
 import { SignInPage } from '../../src/pages/SignInPage';
 import { HomePage } from '../../src/pages/HomePage';
 
@@ -11,7 +11,7 @@ test.beforeEach(async ({ page }) => {
   homePage = new HomePage(page);
 
   user = {
-    email: 'test_new_user@gmail.com',
+    email: 'test_ne@gmail.com',
     password: 'newpass123!',
   };
 });
@@ -22,5 +22,5 @@ test('Successful `Sign in` flow test', async () => {
   await signInPage.fillPasswordField(user.password);
   await signInPage.clickSignInButton();
 
-  await homePage.assertYourFeedTabIsVisible();
+  await expect(homePage.yourFeedTab).toBeVisible();
 });

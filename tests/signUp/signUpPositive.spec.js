@@ -1,4 +1,4 @@
-import { test } from '@playwright/test';
+import { test, expect } from '@playwright/test';
 import { faker } from '@faker-js/faker';
 import { SignUpPage } from '../../src/pages/SignUpPage';
 import { HomePage } from '../../src/pages/HomePage';
@@ -25,5 +25,5 @@ test('Successful `Sign up` flow test', async () => {
   await signUpPage.fillPasswordField(user.password);
   await signUpPage.clickSignUpButton();
 
-  await homePage.assertYourFeedTabIsVisible();
+  await expect(homePage.yourFeedTab).toBeVisible();
 });
