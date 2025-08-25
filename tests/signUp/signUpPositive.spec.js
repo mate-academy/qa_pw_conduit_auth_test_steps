@@ -1,5 +1,4 @@
 import { test } from '@playwright/test';
-import { faker } from '@faker-js/faker';
 import { SignUpPage } from '../../src/pages/SignUpPage';
 import { HomePage } from '../../src/pages/HomePage';
 
@@ -12,9 +11,9 @@ test.beforeEach(async ({ page }) => {
   homePage = new HomePage(page);
 
   user = {
-    username: `${faker.person.firstName()}_${faker.person.lastName()}`,
-    email: faker.internet.email(),
-    password: faker.internet.password(),
+    username: `Ser_Ana1`,
+    email: `ser_ana1@gmail.com`,
+    password: `newpass123!`,
   };
 });
 
