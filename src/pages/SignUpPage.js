@@ -1,4 +1,4 @@
-import { expect } from '@playwright/test';
+import { test, expect } from '@playwright/test';
 
 export class SignUpPage {
   constructor(page) {
@@ -11,26 +11,44 @@ export class SignUpPage {
   }
 
   async open() {
-    await this.page.goto('/user/register');
+    const stepDesc = 'Open the Sign Up page';
+    await test.step(stepDesc, async () => {
+      await this.page.goto('/user/register');
+    });
   }
 
   async fillUsernameField(username) {
-    await this.usernameField.fill(username);
+    const stepDesc = `Fill Username field with "${username}"`;
+    await test.step(stepDesc, async () => {
+      await this.usernameField.fill(username);
+    });
   }
 
   async fillEmailField(email) {
-    await this.emailField.fill(email);
+    const stepDesc = `Fill Email field with "${email}"`;
+    await test.step(stepDesc, async () => {
+      await this.emailField.fill(email);
+    });
   }
 
   async fillPasswordField(password) {
-    await this.passwordField.fill(password);
+    const stepDesc = 'Fill Password field';
+    await test.step(stepDesc, async () => {
+      await this.passwordField.fill(password);
+    });
   }
 
   async clickSignUpButton() {
-    await this.signUpButton.click();
+    const stepDesc = 'Click "Sign up" button';
+    await test.step(stepDesc, async () => {
+      await this.signUpButton.click();
+    });
   }
 
   async assertErrorMessageContainsText(messageText) {
-    await expect(this.errorMessage).toContainText(messageText);
+    const stepDesc = `Assert error message contains text: "${messageText}"`;
+    await test.step(stepDesc, async () => {
+      await expect(this.errorMessage).toContainText(messageText);
+    });
   }
 }
