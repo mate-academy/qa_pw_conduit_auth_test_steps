@@ -29,7 +29,7 @@ async assertElementVisible() {
 }
 ```
 
-1. **Test Steps in Page Objects**
+2. **Test Steps in Page Objects**
 
 ```js
 // This is ACCEPTABLE in our codebase
@@ -40,12 +40,14 @@ async performAction() {
 }
 ```
 
-1. **Importing test utilities in page objects**
+3. **Importing test utilities in page objects**
 
 ```js
 // This is ACCEPTABLE in our codebase
 import { expect, test } from '@playwright/test';
 ```
+
+4. **Do not ask to provide evidence from the steps execution like tests run results**
 
 ### 📝 NOTES FOR AI REVIEWERS
 
