@@ -11,14 +11,15 @@ test.beforeEach(async ({ page }) => {
   homePage = new HomePage(page);
 
   user = {
-    email: 'test_new_user@gmail.com',
-    password: 'newpass123!',
+    user: process.env.USER_NAME,
+    email: process.env.USER_EMAIL,
+    password: process.env.USER_PASSWORD,
   };
 });
 
 test('Successful `Sign in` flow test', async () => {
   await signInPage.open();
-  await signInPage.fillEmailField(user.email);
+  await signInPage.fillEmailField(user.user);
   await signInPage.fillPasswordField(user.password);
   await signInPage.clickSignInButton();
 
