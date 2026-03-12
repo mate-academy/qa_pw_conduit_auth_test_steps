@@ -1,4 +1,4 @@
-import { expect } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 
 export class SignUpPage {
   constructor(page) {
@@ -11,26 +11,38 @@ export class SignUpPage {
   }
 
   async open() {
-    await this.page.goto('/user/register');
+    await test.step(`openSignUpPage`, async () => {
+      await this.page.goto('/user/register');
+    });
   }
 
   async fillUsernameField(username) {
-    await this.usernameField.fill(username);
+    await test.step(`fillUsernameField`, async () => {
+      await this.usernameField.fill(username);
+    });
   }
 
   async fillEmailField(email) {
-    await this.emailField.fill(email);
+    await test.step(`fillEmailField`, async () => {
+      await this.emailField.fill(email);
+    });
   }
 
   async fillPasswordField(password) {
-    await this.passwordField.fill(password);
+    await test.step(`fillPasswordField`, async () => {
+      await this.passwordField.fill(password);
+    });
   }
 
   async clickSignUpButton() {
-    await this.signUpButton.click();
+    await test.step(`clickSignUpButton`, async () => {
+      await this.signUpButton.click();
+    });
   }
 
   async assertErrorMessageContainsText(messageText) {
-    await expect(this.errorMessage).toContainText(messageText);
+    await test.step(`assertErrorMessageContainsText`, async () => {
+      await expect(this.errorMessage).toContainText(messageText);
+    });
   }
 }
