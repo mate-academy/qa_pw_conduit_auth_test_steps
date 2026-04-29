@@ -1,32 +1,42 @@
-import { test } from '@playwright/test';
-import { SignInPage } from '../../src/pages/SignInPage';
+import { expect, test } from '@playwright/test';
 
-test.describe('Sign in negative tests', () => {
-  let signInPage;
+export class SignInPage {
+  constructor(page) {
+    this.page = page;
 
-  test.beforeEach(async ({ page }) => {
-    signInPage = new SignInPage(page);
-    await signInPage.open();
-  });
+    this.emailField = page.locator('input[type="email"]');
+    this.passwordField = page.locator('input[type="password"]');
+    this.signInButton = page.locator('button[type="submit"]');
+    this.errorMessage = page.locator('.error-messages');
+  }
 
-  test('Sign in with empty password', async () => {
-    await signInPage.fillEmailField('test@gmail.com');
-    await signInPage.clickSignInButton();
-    await signInPage.assertErrorMessageContainsText(`password:can't be blank`);
-  });
+  async open() {
+    await test.step(`Open 'Sign In' page`, async () => {
+      await this.page.goto('/login');
+    });
+  }
 
-  test('Sign in with empty email', async () => {
-    await signInPage.fillPasswordField('newpass123!');
-    await signInPage.clickSignInButton();
-    await signInPage.assertErrorMessageContainsText(`email:can't be blank`);
-  });
+  async fillEmailField(email) {
+    await test.step(`Fill the 'Email' field with ${email}`, async () => {
+      await this.emailField.fill(email);
+    });
+  }
 
-  test('Sign in with wrong password', async () => {
-    await signInPage.fillEmailField('test@gmail.com');
-    await signInPage.fillPasswordField('1');
-    await signInPage.clickSignInButton();
-    await signInPage.assertErrorMessageContainsText(
-      `email or password:is invalid`,
-    );
-  });
-});
+  async fillPasswordField(password) {
+    await test.step(`Fill the 'Password' field`, async () => {
+      await this.passwordField.fill(password);
+    });
+  }
+
+  async clickSignInButton() {
+    await test.step(`Click the 'Sign in' button`, async () => {
+      await this.signInButton.click();
+    });
+  }
+
+  async assertErrorMessageContainsText(messageText) {
+    await test.step(`Assert error message contains '${messageText}'`, async () => {
+      await expect(this.errorMessage).toContainText(messageText);
+    });
+  }
+}

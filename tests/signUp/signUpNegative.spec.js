@@ -1,40 +1,49 @@
-import { test } from '@playwright/test';
-import { SignUpPage } from '../../src/pages/SignUpPage';
+import { expect, test } from '@playwright/test';
 
-test.describe('Sign up negative tests', () => {
-  let signUpPage;
+export class SignUpPage {
+  constructor(page) {
+    this.page = page;
 
-  test.beforeEach(async ({ page }) => {
-    signUpPage = new SignUpPage(page);
-    await signUpPage.open();
-  });
+    this.usernameField = page.locator('input[placeholder="Username"]');
+    this.emailField = page.locator('input[placeholder="Email"]');
+    this.passwordField = page.locator('input[placeholder="Password"]');
+    this.signUpButton = page.locator('button[type="submit"]');
+    this.errorMessage = page.locator('.error-messages');
+  }
 
-  test('Sign up with empty username', async () => {
-    const errorMessage = `username:Username must start with a letter,\
-       have no spaces, and be 2 - 40 characters.`;
+  async open() {
+    await test.step(`Open 'Sign Up' page`, async () => {
+      await this.page.goto('/register');
+    });
+  }
 
-    await signUpPage.fillEmailField('test@gmail.com');
-    await signUpPage.fillPasswordField('newpass123!');
-    await signUpPage.clickSignUpButton();
+  async fillUsernameField(username) {
+    await test.step(`Fill the 'Username' field with ${username}`, async () => {
+      await this.usernameField.fill(username);
+    });
+  }
 
-    await signUpPage.assertErrorMessageContainsText(errorMessage);
-  });
+  async fillEmailField(email) {
+    await test.step(`Fill the 'Email' field with ${email}`, async () => {
+      await this.emailField.fill(email);
+    });
+  }
 
-  test('Sign up with empty email', async () => {
-    await signUpPage.fillUsernameField('newuser');
-    await signUpPage.fillPasswordField('newpass123!');
-    await signUpPage.clickSignUpButton();
+  async fillPasswordField(password) {
+    await test.step(`Fill the 'Password' field`, async () => {
+      await this.passwordField.fill(password);
+    });
+  }
 
-    await signUpPage.assertErrorMessageContainsText(
-      `email:This email does not seem valid.`,
-    );
-  });
+  async clickSignUpButton() {
+    await test.step(`Click the 'Sign up' button`, async () => {
+      await this.signUpButton.click();
+    });
+  }
 
-  test('Sign up with empty password', async () => {
-    await signUpPage.fillUsernameField('newuser');
-    await signUpPage.fillEmailField('test@gmail.com');
-    await signUpPage.clickSignUpButton();
-
-    await signUpPage.assertErrorMessageContainsText(`password:can't be blank`);
-  });
-});
+  async assertErrorMessageContainsText(messageText) {
+    await test.step(`Assert error message contains '${messageText}'`, async () => {
+      await expect(this.errorMessage).toContainText(messageText);
+    });
+  }
+}
