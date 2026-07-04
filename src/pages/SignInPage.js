@@ -31,6 +31,10 @@ export class SignInPage {
     await test.step(`Click the 'Sign in' button`, async () => {
       await this.signInButton.click();
     });
+
+    await test.step(`Wait for Home page`, async () => {
+      await this.page.waitForURL('**/');
+    });
   }
 
   async assertErrorMessageContainsText(messageText) {
