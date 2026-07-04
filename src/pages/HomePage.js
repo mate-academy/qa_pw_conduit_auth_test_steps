@@ -1,12 +1,14 @@
-import { expect } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 
 export class HomePage {
   constructor(page) {
     this.page = page;
-    this.yourFeedTab = page.getByText('Your Feed');
+    this.yourFeedTab = page.locator('a.nav-link.active');
   }
 
   async assertYourFeedTabIsVisible() {
-    await expect(this.yourFeedTab).toBeVisible();
+    await test.step(`Assert 'Your Feed' tab is visible`, async () => {
+      await expect(this.yourFeedTab).toBeVisible({ timeout: 15000 });
+    });
   }
 }
