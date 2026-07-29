@@ -17,7 +17,7 @@ export class SignUpPage {
   }
 
   async fillUsernameField(username) {
-    await test.step(`Fill te 'Username' field`, async () => {
+    await test.step(`Fill the 'Username' field`, async () => {
       await this.usernameField.fill(username);
     });
   }
