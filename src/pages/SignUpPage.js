@@ -11,7 +11,7 @@ export class SignUpPage {
   }
 
   async open() {
-    await test.step(`Open 'Sign Un' page`, async () => {
+    await test.step(`Open 'Sign Up' page`, async () => {
       await this.page.goto('/user/register');
     });
   }
