@@ -35,7 +35,7 @@ export class SignUpPage {
   }
 
   async clickSignUpButton() {
-    await test.step(`Click the 'Sign un' button`, async () => {
+    await test.step(`Click the 'Sign up' button`, async () => {
       await this.signUpButton.click();
     });
   }
