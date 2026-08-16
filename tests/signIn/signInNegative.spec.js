@@ -4,6 +4,7 @@ import { SignInPage } from '../../src/pages/SignInPage';
 test.describe('Sign in negative tests', () => {
   let signInPage;
 
+  
   test.beforeEach(async ({ page }) => {
     signInPage = new SignInPage(page);
     await signInPage.open();
