@@ -1,3 +1,4 @@
+// Updated based on review feedback
 import { expect, test } from '@playwright/test';
 
 export class SignUpPage {
