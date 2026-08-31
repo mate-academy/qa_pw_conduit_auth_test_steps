@@ -41,7 +41,7 @@ export class SignUpPage {
   }
 
   async assertErrorMessageContainsText(messageText) {
-    await test.step(`click sign up button`, async () => {
+    await test.step(`contain error message`, async () => {
       await expect(this.errorMessage).toContainText(messageText);
     });
   }
