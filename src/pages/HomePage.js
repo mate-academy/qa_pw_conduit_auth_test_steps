@@ -7,7 +7,7 @@ export class HomePage {
   }
 
   async assertYourFeedTabIsVisible() {
-    await test.step(`Assert 'Your Feed' tab is visible`, async () => {
+    await test.step(`Assert 'Your Feed Tab' tab is visible`, async () => {
       await expect(this.yourFeedTab).toBeVisible();
     });
   }
