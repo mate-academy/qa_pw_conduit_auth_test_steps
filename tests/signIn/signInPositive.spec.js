@@ -3,6 +3,7 @@ import { SignInPage } from '../../src/pages/SignInPage';
 import { HomePage } from '../../src/pages/HomePage';
 
 let signInPage;
+
 let homePage;
 let user;
 
@@ -11,8 +12,8 @@ test.beforeEach(async ({ page }) => {
   homePage = new HomePage(page);
 
   user = {
-    email: 'test_new_user@gmail.com',
-    password: 'newpass123!',
+    email: 'danlinker17+viewer@gmail.com',
+    password: '11111111',
   };
 });
 
