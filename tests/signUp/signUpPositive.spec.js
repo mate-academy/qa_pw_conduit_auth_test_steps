@@ -18,7 +18,7 @@ test.beforeEach(async ({ page }) => {
   };
 });
 
-test('Successful `Sign up` flow test', async () => {
+test(`Successful 'Sign up' flow test`, async () => {
   await signUpPage.open();
   await signUpPage.fillUsernameField(user.username);
   await signUpPage.fillEmailField(user.email);
